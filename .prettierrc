@@ -3,5 +3,6 @@
   "jsxBracketSameLine": false,
   "printWidth": 100,
   "singleQuote": true,
-  "semi": false
+  "semi": false,
+  "endOfLine": "lf"
 }
