@@ -16,7 +16,14 @@ const VehicleTile = ({ vehicle }) => {
       <div className={styles.imageContainer}>
         <img src={vehicle.image.url} className={styles.image} />
       </div>
-      <h1>{getModelName(vehicle.name)}</h1>
+      <span className={styles.title}>{getModelName(vehicle.name)}</span>
+      <div className={styles.detailsContainer}>
+        <span>{vehicle.price}</span>
+        <div className={styles.mileagaContainer}>
+          <p className={styles.mileage}>{vehicle.mileage}</p>
+          <p className={styles.year}>{vehicle.year}</p>
+        </div>
+      </div>
     </Link>
   )
 }

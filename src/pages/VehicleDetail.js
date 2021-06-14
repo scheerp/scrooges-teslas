@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import OrderForm from '../components/OrderForm/OrderForm'
 import { useVehicle } from '../utils'
@@ -8,14 +9,19 @@ const getEnhancedDescription = description => {
 
   return (
     <ul>
-      {descriptionArray.map((partialString, index) => (
-        <li key={index}>{partialString}</li>
-      ))}
+      {descriptionArray.map((partialString, index) =>
+        index === 0 ? (
+          <p key={index}>{partialString}</p>
+        ) : (
+          <li key={index}>{partialString}</li>
+        )
+      )}
     </ul>
   )
 }
 
 const VehicleDetail = () => {
+  const [displayOrderFormModal, setDisplayOrderFormModal] = useState(false)
   const { id } = useParams()
 
   const { loading, error, data } = useVehicle(id)
@@ -27,7 +33,14 @@ const VehicleDetail = () => {
     <>
       <h1>{data.vehicle.name}</h1>
       <img src={data.vehicle.image.url} />
-      <OrderForm vehicleId={id} />
+      <button type="button" onClick={() => setDisplayOrderFormModal(true)}>
+        Order
+      </button>
+      <OrderForm
+        vehicleId={id}
+        closeForm={setDisplayOrderFormModal}
+        displayModal={displayOrderFormModal}
+      />
       <div>{getEnhancedDescription(data.vehicle.description)}</div>
     </>
   )
