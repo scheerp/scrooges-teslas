@@ -40,14 +40,18 @@ export const useVehicle = id => {
 `)
 }
 
-export const useOrderVehicle = (name, email, vehicleId) => {
+export const useOrderVehicle = () => {
   return useMutation(gql`
-    mutation CreateOrder{
+    mutation CreateOrder(
+      $customerName: String!
+      $customerEmail: String!
+      $vehicle: VehicleCreateOneInlineInput
+    ) {
       createOrder(
         data: {
-          customerName: ${name}
-          customerEmail: ${email}
-          vehicle: { connect: { id: ${vehicleId} } }
+          customerName: $customerName
+          customerEmail: $customerEmail
+          vehicle: $vehicle
         }
       ) {
         id

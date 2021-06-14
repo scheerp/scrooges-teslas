@@ -1,35 +1,31 @@
 import { useState } from 'react'
-//import { useOrderVehicle } from '../../utils'
-import { useMutation, gql } from '@apollo/client'
+import { useOrderVehicle } from '../../utils'
 
 const OrderForm = ({ vehicleId }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [orderVehicle, { loading: mutationLoading, error: mutationError }] =
-    useMutation(gql`
-      mutation CreateOrder(
-        $customerName: String!
-        $customerEmail: String!
-        $vehicleId: ID
-      ) {
-        createOrder(
-          data: {
-            customerName: $customerName
-            customerEmail: $customerEmail
-            vehicle: { connect: { id: $vehicleId } }
-          }
-        ) {
-          id
-        }
-      }
-    `)
-  const handleSubmit = e => {
+  const [
+    orderVehicle,
+    { loading: mutationLoading, error: mutationError, data },
+  ] = useOrderVehicle()
+
+  const handleSubmit = async e => {
     e.preventDefault()
-    orderVehicle({ variables: { name, email, vehicleId } })
-    console.log({ mutationLoading, mutationError })
-    //useOrderVehicle(name, email, vehicleId)
-    alert(`Submitting Name ${name} and email ${email}`)
+    try {
+      await orderVehicle({
+        variables: {
+          customerName: name,
+          customerEmail: email,
+          vehicle: { connect: { id: vehicleId } },
+        },
+      })
+      alert(`Submitting Name ${name} and email ${email}`)
+    } catch (error) {
+      console.error(error)
+    }
   }
+
+  console.log({ mutationLoading, mutationError, data })
 
   return (
     <form onSubmit={handleSubmit}>
