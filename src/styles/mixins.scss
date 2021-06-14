@@ -1,0 +1,7 @@
+@import './variables';
+
+@mixin min-breakpoint($bp) {
+  @media (min-width: map-get($breakpoints, $bp )) {
+    @content;
+  }
+}

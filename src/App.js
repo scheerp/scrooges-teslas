@@ -1,25 +1,17 @@
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import Router from './Router'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+
+const client = new ApolloClient({
+  uri: 'https://api-eu-central-1.graphcms.com/v2/cknoq6cg8n99i01z38l7l22oe/master',
+  cache: new InMemoryCache(),
+})
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Router />
+    </ApolloProvider>
   )
 }
 

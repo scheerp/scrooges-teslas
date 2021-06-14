@@ -1,36 +1,15 @@
-import { useQuery, gql } from '@apollo/client'
-
-const ALL_VEHICLES = gql`
-  query GetAllVehicles {
-    vehicles {
-      id
-      mileage
-      year
-      name
-      price
-      vin
-      description
-      image {
-        url
-        fileName
-      }
-    }
-  }
-`
+import VehicleTile from '../components/VehicleTile/VehicleTile'
+import { useVehicles } from '../utils.js'
 
 const VehicleOverview = () => {
-  const { loading, error, data } = useQuery(ALL_VEHICLES)
+  const { loading, error, data } = useVehicles()
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   console.log(data)
 
   return data.vehicles.map(vehicle => (
-    <div key={vehicle.id}>
-      <p>audo: {vehicle.name}</p>
-      <p>audo: {vehicle.description}</p>
-      <img src={vehicle.image.url} />
-    </div>
+    <VehicleTile vehicle={vehicle} key={vehicle.id} />
   ))
 }
 
