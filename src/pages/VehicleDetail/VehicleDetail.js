@@ -78,7 +78,9 @@ const VehicleDetail = () => {
         >
           Order
         </button>
-        <div>{getEnhancedDescription(data.vehicle.description)}</div>
+        <div className={styles.description}>
+          {getEnhancedDescription(data.vehicle.description)}
+        </div>
       </div>
 
       <OrderForm
