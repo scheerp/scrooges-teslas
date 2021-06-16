@@ -1,16 +1,12 @@
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
-import VehicleOverview from './pages/VehicleOverview'
-import VehicleDetail from './pages/VehicleDetail'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import VehicleOverview from './pages/VehicleOverview/VehicleOverview'
+import VehicleDetail from './pages/VehicleDetail/VehicleDetail'
+import Header from './components/Header/Header'
 
 const Router = () => (
   <BrowserRouter>
     <div>
-      <ul>
-        <li>
-          <Link to="/vehicleDetail/cknosxo3k6pm70b516ysogq5q">2</Link>
-        </li>
-      </ul>
-
+      <Header />
       <Switch>
         <Route exact path="/" component={VehicleOverview} />
         <Route path="/vehicleDetail/:id" component={VehicleDetail} />

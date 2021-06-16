@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+
+  .logo {
+    width: 70%;
+    height: auto;
+    max-width: 725px;
+    min-width: 280px;
+  }
+
+  .title {
+    margin-left: 15px;
+
+    h1 {
+      font-size: 100px;
+      margin: 5px 0;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      margin: -25px 0 10px 20px;
+    }
+  }
+}

@@ -1,18 +1,16 @@
 import { useState } from 'react'
 import { useOrderVehicle } from '../../utils'
+import styles from './OrderForm.module.scss'
 
 const OrderForm = ({ vehicleId, closeForm, displayModal }) => {
   const [name, setName] = useState('')
-  const [isValidName, setIsValidName] = useState(true)
+  const [isValidName, setIsValidName] = useState(false)
 
   const [email, setEmail] = useState('')
   const [isValidEmail, setIsValidEmail] = useState(false)
 
   const [showValidation, setShowValidation] = useState(false)
-  const [
-    orderVehicle,
-    // { loading: mutationLoading, error: mutationError, data },
-  ] = useOrderVehicle()
+  const [orderVehicle] = useOrderVehicle()
 
   function validateEmail(email) {
     const regex =
@@ -40,50 +38,72 @@ const OrderForm = ({ vehicleId, closeForm, displayModal }) => {
             vehicle: { connect: { id: vehicleId } },
           },
         })
-        // alert(`Submitting Name ${name} and email ${email}`)
       } catch (error) {
-        // console.error(error)
+        alert('Something went wrong :/')
       }
-      closeForm(false)
+      closeForm()
+      alert('Success! Thank you for your purchase!')
     }
   }
 
-  // console.log({ mutationLoading, mutationError, data })
   if (!displayModal) return null
-
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="button" onClick={() => closeForm(false)}>
-        X
-      </button>
-      <label>
-        Name:
-        <input
-          type="text"
-          value={name}
-          placeholder="John Duck"
-          onChange={e => handleNameInput(e.target.value)}
-        />
-        {!isValidName && showValidation && <p>Please tell us your name</p>}
-      </label>
-      <label>
-        E-Mail:
-        <input
-          type="text"
-          value={email}
-          placeholder="John-Duck@Duckburg.com"
-          onChange={e => handleEmailInput(e.target.value)}
-        />
-        {!isValidEmail && showValidation && <p>Please enter a valid email</p>}
-      </label>
-      <button
-        type="submit"
-        value="Submit"
-        disabled={showValidation && (!isValidName || !isValidEmail)}
-      >
-        Place Order
-      </button>
-    </form>
+    <div className={styles.wrapper}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.inputField}>
+          <label className={styles.label}>Name: </label>
+          <input
+            type="text"
+            className={styles.input}
+            value={name}
+            placeholder="John Duck"
+            onChange={e => handleNameInput(e.target.value)}
+          />
+          {
+            <p
+              className={`${styles.validationMessage} ${
+                !isValidName && showValidation && styles.show
+              }`}
+            >
+              Please tell us your name
+            </p>
+          }
+        </div>
+        <div className={styles.inputField}>
+          <label className={styles.label}>E-Mail: </label>
+          <input
+            type="text"
+            className={styles.input}
+            value={email}
+            placeholder="John-Duck@Duckburg.com"
+            onChange={e => handleEmailInput(e.target.value)}
+          />
+          <p
+            className={`${styles.validationMessage} ${
+              !isValidEmail && showValidation && styles.show
+            }`}
+          >
+            Please enter a valid email
+          </p>
+        </div>
+        <div>
+          <button
+            className={styles.cancelButton}
+            type="button"
+            onClick={() => closeForm()}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            value="Submit"
+            disabled={showValidation && (!isValidName || !isValidEmail)}
+          >
+            Place Order
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
 

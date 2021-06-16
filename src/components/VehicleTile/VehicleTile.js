@@ -2,11 +2,16 @@ import styles from './VehicleTile.module.scss'
 import { Link } from 'react-router-dom'
 
 const getModelName = name => {
-  return name.slice(name.indexOf('Model '), 18)
+  return name.slice(name.indexOf('Model '), name.indexOf(' - '))
 }
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 0,
+})
+
 const VehicleTile = ({ vehicle }) => {
-  console.log(getModelName(vehicle.name))
   return (
     <Link
       to={`/vehicleDetail/${vehicle.id}`}
@@ -16,12 +21,13 @@ const VehicleTile = ({ vehicle }) => {
       <div className={styles.imageContainer}>
         <img src={vehicle.image.url} className={styles.image} />
       </div>
-      <span className={styles.title}>{getModelName(vehicle.name)}</span>
+      <p className={styles.price}>{formatter.format(vehicle.price)}</p>
       <div className={styles.detailsContainer}>
-        <span>{vehicle.price}</span>
+        <p>{getModelName(vehicle.name)}</p>
         <div className={styles.mileagaContainer}>
-          <p className={styles.mileage}>{vehicle.mileage}</p>
-          <p className={styles.year}>{vehicle.year}</p>
+          <p className={styles.mileage}>
+            {vehicle.mileage} | {vehicle.year}
+          </p>
         </div>
       </div>
     </Link>

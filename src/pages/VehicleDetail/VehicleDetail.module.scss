@@ -1,0 +1,93 @@
+@import '../../styles/mixins.scss';
+
+.wrapper {
+  margin: 0 15px;
+  max-width: 970px;
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  max-width: 1400px;
+  font-size: 24px;
+}
+
+.vehicleDataWrapper {
+  display: flex;
+  align-self: flex-start;
+}
+
+.vehicleData {
+  li {
+    font-weight: 500;
+  }
+}
+
+.orderButton {
+  margin-left: 0;
+}
+
+.descriptionList {
+  padding-left: 0;
+  li {
+    margin-top: 5px;
+    list-style-type: none;
+    padding-left: 10px;
+  }
+}
+
+.vehicleData,
+.vehicleDataValues {
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    margin-bottom: 10px;
+    margin-right: 50px;
+  }
+}
+
+@include min-breakpoint(md) {
+  .wrapper {
+    margin: 0 30px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+}
+
+@include min-breakpoint(lg) {
+  .wrapper {
+    margin: auto;
+  }
+
+  .headerWrapper {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .image {
+    width: 60%;
+    height: auto;
+    max-width: 600px;
+    margin-right: 30px;
+  }
+
+  .vehicleData,
+  .vehicleDataValues {
+    align-self: flex-start;
+    margin: 0;
+  }
+}

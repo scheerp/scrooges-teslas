@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+
+.wrapper {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  margin: 15px;
+  padding: 30px;
+  width: 90%;
+  background: white;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cancelButton {
+  border: solid 1px $mainColorAlt;
+  color: $mainColorAlt;
+  background: white;
+
+  &:hover {
+    color: white;
+    border: solid 1px white;
+    background: rgb(110, 161, 163);
+  }
+}
+
+.inputField {
+  margin-left: 15px;
+}
+
+.input {
+  margin-bottom: 0;
+  border: solid black 1px;
+  border-radius: 3px;
+  padding: 5px;
+  min-width: 200px;
+}
+
+.label {
+  margin-right: 10px;
+}
+
+.validationMessage {
+  opacity: 0;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  color: $error;
+}
+
+.show {
+  opacity: 1;
+}

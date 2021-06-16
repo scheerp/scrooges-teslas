@@ -1,3 +1,5 @@
+@import './variables';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,4 +11,30 @@ body {
 
 a {
   text-decoration: none;
+}
+
+button {
+  background: $mainColor;
+  margin: 15px;
+  color: white;
+  border: none;
+  padding: 10px 50px;
+  border-radius: 6px;
+  font-size: 15px;
+  transition-duration: 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    background: rgb(0, 136, 141);
+  }
+
+  &:disabled {
+    background-color: rgb(88, 88, 88);
+    cursor: default;
+  }
+}
+
+input {
+  margin-bottom: 15px;
+  width: 150px;
 }
