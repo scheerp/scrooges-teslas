@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import OrderForm from '../../components/OrderForm/OrderForm'
 import { useVehicle } from '../../utils'
 import styles from './VehicleDetail.module.scss'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const getEnhancedDescription = description => {
   const descriptionArray = description.split('•')
@@ -41,8 +42,9 @@ const VehicleDetail = () => {
     setDisplayOrderFormModal(false)
     document.body.style.overflow = 'scroll'
   }
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+
+  if (loading) return <LoadingSpinner />
+  if (error) return <p>Something went wrong, sorry :/</p>
 
   return (
     <>
